@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      API_PORT: 3000
+      DB_USER: user
+      DB_HOST: db
+      DB_DATABASE: db-database
+      DB_PASSWORD: 123456
+      DB_PORT: 5432
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: db-database
+    ports:
+      - "5432:5432"
